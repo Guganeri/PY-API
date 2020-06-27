@@ -1,4 +1,21 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, Response
+from dotenv import load_dotenv
+from bson.json_util import dumps
+import json
+import pymongo
+import os
+
+load_dotenv()
+BDURL = os.getenv("BDURL")
+
+client = pymongo.MongoClient()
+db = client.api_cat
+catCollection = db['api_cat']
+
+#listAll = list(catCollection.find())
+#print(type(listAll))
+#print(listAll)    
+
 
 app = Flask("API-CAT")
 
@@ -9,9 +26,18 @@ def home():
 
 
 @app.route('/listar-racas', methods=['GET'])
-def listar_racas():
-    return jsonify(), 200
+def listar_racas():      
+    cats = dumps(catCollection.find())
+    response = Response(status=200, headers={}, response=cats, mimetype='application/json')
+    return response
 
 
+@app.route('/listar-racas/<string:raca>/', methods=['GET'])     
+def listar_racas_inf(raca):
+    cats = dumps(catCollection.find({"id": raca}))
+    response = Response(status=200, headers={}, response=cats, mimetype='application/json')
+    return response
+
+  
 if __name__ == '__main__':
     app.run(debug=True)
