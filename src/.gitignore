@@ -1,3 +1,6 @@
 cons.py
 .env
 .vscode
+../.idea
+../readme.txt
+../tut.txt
