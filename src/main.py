@@ -1,7 +1,8 @@
+from flask import Flask, jsonify, Response
 from cat.CatRequest import CatRequest
-from cat.CatFiller import CatFiller
 from dotenv import load_dotenv
 from bson.json_util import dumps
+import json
 import pymongo
 import os
 
@@ -10,17 +11,11 @@ load_dotenv()
 
 BDURL = os.getenv("BDURL")
 
-client = pymongo.MongoClient()
+client = pymongo.MongoClient(BDURL)
 db = client.api_cat
 catCollection = db['api_cat']
-
-#dblist = client.list_database_names()
-# if "api_cat" in dblist:
-#    print("database up")
-
-#collist = db.list_collection_names()
-# if "api_cat" in collist:
-#    print("Collection exists.")
+hatCatCollection = db['hat_Cat']
+glassCatCollection = db['glass_Cat']
 
 TOKEN = os.getenv("TOKEN")
 URL = os.getenv("URL")
@@ -28,41 +23,69 @@ URL = os.getenv("URL")
 
 def main():
 
-    cat_data = CatRequest(URL, TOKEN)
-    cats = []
-    #catList = ()
-
+    cat_data = CatRequest(f'{URL}/breeds', TOKEN)
+    cats = [] #Lista final para insert na base
+    catd = [] #Lista para guardar informações durante for e concatenar inf
+    
     for cat in cat_data:
         get = catCollection.find({"id": cat["id"]})
         if (list(get) == []):
-                print("not exist")
- 
-                cats.append({
-                'id' : cat["id"],
-                'origin' : cat["origin"],
-                'temperamen' : cat["temperament"],
-                'description' : cat["description"]
+            print(f'No exist: {cat["id"]} in database add.')
+            catd = {
+                'id': cat["id"],
+                'origin': cat["origin"],
+                'temperament': cat["temperament"],
+                'description': cat["description"]
+            }
+            cat_dataNew = CatRequest(
+                f'{URL}/images/search?id="{cat["id"]}"&limit=3&format=jpg', TOKEN)
+            for cat in range(len(cat_dataNew)):
+                # print(cat_dataNew[cat]["url"])
+                catd.update({
+                    f'url{cat}': (cat_dataNew[cat]["url"])
                 })
- 
+            cats.append(catd)            
+    
         else:
-                print("exist ! not add")
- 
+            print("exist ! not add")
+    
     if not cats == []:
         catCollection.insert_many(cats)
+    
+    ###### END INSERT BREEDS ######
+        
 
-        # if (catCollection.find({"id": cat["id"]})):
-        #    cats.append({
-        #        'id' : cat["id"],
-        #        'origin' : cat["origin"],
-        #        'temperamen' : cat["temperament"],
-        #        'description' : cat["description"]
-        #    })
+    cat_data = CatRequest(f'{URL}/images/search?category_ids={"1"}&limit=3', TOKEN)
 
-    # for cat in cats:
-    #    print(cat["id"])
+    catsIMG = []
+    catsTempImg = []
 
-    # catCollection.insert_many(cats)
+    for hatCat in range(len(cat_data)):   
+        get = hatCatCollection.find({"url": cat_data[hatCat]["url"]})
+        if (list(get) == []):
+            catsTempImg = {            
+                f'url': (cat_data[hatCat]["url"])
+            }
+        catsIMG.append(catsTempImg)    
+    if not catsIMG == []:
+        hatCatCollection.insert_many(catsIMG)     
+        catsIMG.clear()
+        catsTempImg.clear()
 
+    cat_data = CatRequest(f'{URL}/images/search?category_ids={"4"}&limit=3', TOKEN)
+    
+    for glassCat in range(len(cat_data)):
+        get = hatCatCollection.find({"url": cat_data[glassCat]["url"]})
+        if (list(get) == []):
+            catsTempImg = {
+                f'url':(cat_data[glassCat]["url"])
+            }
+        catsIMG.append(catsTempImg)    
+    if not catsIMG == []:
+        glassCatCollection.insert_many(catsIMG)
+        catsIMG.clear()
+        catsTempImg.clear()
+                
 
 if __name__ == "__main__":
     main()
