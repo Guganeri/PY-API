@@ -8,3 +8,7 @@ pip install pymongo
 pip install flask
 pip install dnspython
 pip install -U python-dotenv
+pip install logging
+pip install prometheus_client
+
+
