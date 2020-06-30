@@ -25,6 +25,7 @@ glassCatCollection = db['glass_Cat']
 
 
 app = Flask("API-CAT")
+app.config["LOG_LOCATION"] = "./logs"
 app.config["LOG_TYPE"] = "JSON"
 Log(app)
 
@@ -176,4 +177,4 @@ def requests_count():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
