@@ -9,6 +9,8 @@ import prometheus_client
 from prometheus_client.core import CollectorRegistry
 from prometheus_client import Summary, Counter, Histogram, Gauge
 import time
+import consummer
+
 
 
 load_dotenv()
@@ -24,7 +26,7 @@ glassCatCollection = db['glass_Cat']
  
 ### Logs inf ###
 logging.basicConfig(filename='meow.log')
-logging.warning('teste')
+logging.info('Inicializando')
 
 
 ### API ROUTES INICIO ###
@@ -142,6 +144,11 @@ def listar_img_oculus():
     end = time.time()
     graphs['h'].observe(end - start)
 
+@app.route('/insert')
+def con():
+    consummer.insertDatabse()
+    return Response(status=201)
+
 @app.route('/metrics') 
 def requests_count():    
     res = []
@@ -149,5 +156,6 @@ def requests_count():
         res.append(prometheus_client.generate_latest(v))
     return Response(res, mimetype="text/plain")
 
-if __name__ == '__main__':
+
+if __name__ == '__main__':    
     app.run(debug=True)

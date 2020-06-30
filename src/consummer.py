@@ -21,7 +21,7 @@ TOKEN = os.getenv("TOKEN")
 URL = os.getenv("URL")
 
 
-def main():
+def insertDatabse():
 
     cat_data = CatRequest(f'{URL}/breeds', TOKEN)
     cats = [] #Lista final para insert na base
@@ -48,6 +48,7 @@ def main():
     
         else:
             print("exist ! not add")
+            continue
     
     if not cats == []:
         catCollection.insert_many(cats)
@@ -87,5 +88,5 @@ def main():
         catsTempImg.clear()
                 
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+#    main()
