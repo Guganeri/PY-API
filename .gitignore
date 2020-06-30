@@ -4,3 +4,5 @@ cons.py
 __pycache__
 .vscode
 .env
+meow.log
+flask-web-log.json
