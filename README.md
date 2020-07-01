@@ -31,9 +31,9 @@ Listar imagem de gatos com chapéu.
 
 [`localhost:5000`](http://localhost:5000) `/listar/img/chapeu/`
 
-Listar imagem de gatos com óculus.
+Listar imagem de gatos com óculoss.
 
-[`localhost:5000`](http://localhost:5000) `/listar/img/oculus/`
+[`localhost:5000`](http://localhost:5000) `/listar/img/oculos/`
 
 ## Uso:
 

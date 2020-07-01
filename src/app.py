@@ -147,8 +147,8 @@ def listar_img_chapeu():
 ### Listar imagem de gatos com óculus ###
 
 
-@app.route('/listar/img/oculus/', methods=['GET'])
-def listar_img_oculus():
+@app.route('/listar/img/oculos/', methods=['GET'])
+def listar_img_oculos():
     start = time.time()
     graphs['c'].inc()
     cats = list(glassCatCollection.find())
