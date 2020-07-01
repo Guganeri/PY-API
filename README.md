@@ -54,6 +54,20 @@ Listar imagem de gatos com óculus.
     ```
 
     ```
-    Execute: pip install requirements.txt
+    Execute: pip3 install -r requirements.txt or pip install -r requirements.txt
     ```
 
+    ```
+    Execute: python3 app.py
+    ```
+
+
+2. Docker
+
+    ```
+    sudo docker run -d --restart=unless-stopped -p 5000:5000 \
+    --env="URL=https://api.thecatapi.com/v1" \
+    --env="DBURL=MongoDbUrl" \
+    --env="TOKEN=SuaApiKey" \
+    guganeri/apicatpy:v1
+    ```
