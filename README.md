@@ -13,7 +13,7 @@ O dados utilizados por essa API são consumidos diretamente de [TheCatAPI](https
 
 Listar todas as raças.
 
-[`localhost:5000`](http://localhost:5000) `/listar-racas/` (`Listar todas as raças`)
+[`localhost:5000`](http://localhost:5000) `/listar-racas/` 
 
 Listar informações partindo de uma raça.
 
