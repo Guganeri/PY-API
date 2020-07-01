@@ -37,19 +37,18 @@ Listar imagem de gatos com óculus.
 
 ## Uso:
 
-1. Locall
+1. Local
 
     ``` 
     Clone o repositório: https://github.com/Guganeri/PY-API
     ```
 
     ``` 
-    Crie um arquivo dentro da pasta sc chamado '.env' e dentro dele adicione as linhas: 
+    cd src
+    cria um arquivo chamado '.env' e dentro dele adicione as linhas: 
 
     URL=https://api.thecatapi.com/v1
-
     TOKEN='SEU-TOKEN-THECATAPI'
-
     BDURL='URL-MONGODB'
     ```
 
@@ -60,6 +59,8 @@ Listar imagem de gatos com óculus.
     ```
     Execute: python3 app.py
     ```
+
+    **Se você estiver usando OS Windows será necessário alterar a última linha do arquivo app.py de host="0.0.0.0" para host="127.0.0.1"**
 
 
 2. Docker
