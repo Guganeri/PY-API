@@ -1,0 +1,20 @@
+version: '2'
+services:
+  API-CAT:
+    image: guganeri/apicatpy:v1
+    environment:
+      URL: https://api.thecatapi.com/v1
+      TOKEN: 
+      BDURL: 
+    stdin_open: true
+    volumes:
+    - /var:/usr/src/logs/
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  catapi-lb:
+    image: rancher/lb-service-haproxy:v0.9.14
+    ports:
+    - 5000:5000/tcp
+
+
