@@ -72,3 +72,9 @@ Listar imagem de gatos com óculus.
     --env="TOKEN=SuaApiKey" \
     guganeri/apicatpy:v1
     ```
+## Requisitos:
+
+- [x] Python 3.7
+- [x] Pip 20.0.2
+- [x] MongoDB
+- [x] Git
