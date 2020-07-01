@@ -129,7 +129,7 @@ def listar_racas_origin(origem):
 ### Listar imagem de gatos com chapéu ###
 
 
-@app.route('/listar/img/chapeu', methods=['GET'])
+@app.route('/listar/img/chapeu/', methods=['GET'])
 def listar_img_chapeu():
     start = time.time()
     graphs['c'].inc()
@@ -147,7 +147,7 @@ def listar_img_chapeu():
 ### Listar imagem de gatos com óculus ###
 
 
-@app.route('/listar/img/oculus', methods=['GET'])
+@app.route('/listar/img/oculus/', methods=['GET'])
 def listar_img_oculus():
     start = time.time()
     graphs['c'].inc()
