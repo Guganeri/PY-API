@@ -31,7 +31,7 @@ Listar imagem de gatos com chapéu.
 
 [`localhost:5000`](http://localhost:5000) `/listar/img/chapeu/`
 
-Listar imagem de gatos com óculoss.
+Listar imagem de gatos com óculos.
 
 [`localhost:5000`](http://localhost:5000) `/listar/img/oculos/`
 
