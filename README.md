@@ -2,7 +2,7 @@
 
 **PY-API é uma API desenvolvida em Python/Flask.**
 
-O dados utilizados por essa API são consumidos diretamente de [TheCatAPI](https://thecatapi.com/) armezena em um banco de dados (MongoDB) e disponibiliza atráves dos seguintes paths.
+O dados utilizados por essa API são consumidos diretamente de [TheCatAPI](https://thecatapi.com/) armezena em um banco de dados (MongoDB) e disponibiliza através dos seguintes paths.
 
 ### PATHS:
 
